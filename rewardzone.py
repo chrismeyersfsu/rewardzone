@@ -99,7 +99,12 @@ def send_reward():
     rewardee = 'cmeyers@redhat.com'
 
     # TODO: allow spaces in the message
-    (username, password, token, points, message) = request.form['text'].split()
+    x = request.form['text'].split()
+    username = x[0]
+    password = x[1]
+    token = x[2]
+    points = x[3]
+    message = x[4:]
     response_url = request.form['response_url']
 
     submit = True
@@ -123,5 +128,5 @@ def send_reward():
     return jsonify(text=msg)
 
 if __name__ == "__main__":
-    app.debug = True
+    #app.debug = True
     app.run(host='0.0.0.0')
