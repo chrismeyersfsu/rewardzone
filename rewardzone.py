@@ -128,7 +128,7 @@ def send_reward():
     rewardee = rewardee + "@redhat.com"
     t = threading.Thread(target=_send_reward, args=(response_url, rewardee, token, username, password, points, message, submit))
     t.start()
-    msg = 'Queued your request for %s point to be given to Chris Meyers!' % (points)
+    msg = 'Queued your request for %s point to be given to %s!' % (points, rewardee)
     return jsonify(text=msg)
 
 if __name__ == "__main__":
