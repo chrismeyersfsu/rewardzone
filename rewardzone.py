@@ -103,8 +103,9 @@ def send_reward():
     username = x[0]
     password = x[1]
     token = x[2]
-    points = x[3]
-    message = x[4:]
+    rewardee = x[3]
+    points = x[4]
+    message = x[5:]
     response_url = request.form['response_url']
 
     submit = True
@@ -115,6 +116,8 @@ def send_reward():
         errors.append("username not found")
     if not password:
         errors.append("password not found")
+    if not rewardee:
+        errors.append("rewardee not found")
     if not points:
         errors.append("points not found")
     if not message:
@@ -122,6 +125,7 @@ def send_reward():
     if len(errors) > 0:
         return jsonify(errors=errors)
 
+    rewardee = rewardee + "@redhat.com"
     t = threading.Thread(target=_send_reward, args=(response_url, rewardee, token, username, password, points, message, submit))
     t.start()
     msg = 'Queued your request for %s point to be given to Chris Meyers!' % (points)
