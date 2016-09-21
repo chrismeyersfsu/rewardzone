@@ -105,7 +105,7 @@ def send_reward():
     token = x[2]
     rewardee = x[3]
     points = x[4]
-    message = x[5:]
+    message = ' '.join(x[5:])
     response_url = request.form['response_url']
 
     submit = True
